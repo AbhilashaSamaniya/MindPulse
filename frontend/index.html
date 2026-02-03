@@ -1,0 +1,2272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MindPulse — Cognitive Burnout & Recovery Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0a0f14;
+        --bg-2: #0f1721;
+        --card: #131d28;
+        --card-2: #0f1a24;
+        --ink: #e9f1f7;
+        --muted: #9fb3c8;
+        --accent: #7cf5c6;
+        --accent-2: #46a6ff;
+        --warning: #f3c969;
+        --danger: #ff6b6b;
+        --shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+        --radius: 18px;
+        --glow: 0 0 40px rgba(124, 245, 198, 0.2);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: radial-gradient(circle at 10% 10%, #1a2a3a, transparent 45%),
+          radial-gradient(circle at 90% 20%, #1b2f3f, transparent 35%),
+          linear-gradient(140deg, #0a0f14 0%, #0a141e 55%, #0d1724 100%);
+        color: var(--ink);
+        font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+        min-height: 100vh;
+      }
+
+      .page {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 36px 20px 60px;
+        display: grid;
+        gap: 24px;
+      }
+
+      header {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 24px;
+        align-items: center;
+      }
+
+      .title-card {
+        background: linear-gradient(135deg, rgba(124, 245, 198, 0.12), rgba(70, 166, 255, 0.06));
+        border-radius: var(--radius);
+        padding: 28px 28px 24px;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+      }
+
+      .title-card h1 {
+        margin: 0 0 8px;
+        font-family: "Fraunces", serif;
+        font-weight: 600;
+        letter-spacing: 0.4px;
+        font-size: clamp(2rem, 3.2vw, 3rem);
+      }
+
+      .welcome-text {
+        margin: 0 0 8px;
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+
+      .title-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .title-card .tagline {
+        margin-top: 10px;
+        color: var(--accent);
+        font-weight: 600;
+      }
+
+      .checkin-row {
+        margin-top: 12px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .checkin-row button {
+        padding: 8px 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(124, 245, 198, 0.4);
+        background: linear-gradient(135deg, rgba(124, 245, 198, 0.2), rgba(70, 166, 255, 0.15));
+        color: var(--ink);
+        cursor: pointer;
+        font-family: inherit;
+      }
+
+      .checkin-row span {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      .signin-pill {
+        position: fixed;
+        top: 16px;
+        right: 20px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        color: var(--muted);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(8, 14, 20, 0.6);
+        z-index: 70;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .signin-pill button {
+        border: none;
+        background: transparent;
+        color: var(--accent);
+        font-size: 0.7rem;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .header-metrics {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+      .metric-card {
+        background: var(--card);
+        border-radius: var(--radius);
+        padding: 18px;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+      }
+
+      .metric-card h4 {
+        margin: 0 0 8px;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 1.4px;
+        color: var(--muted);
+      }
+
+      .metric-card .value {
+        font-size: 2rem;
+        font-weight: 600;
+      }
+
+      .metric-card .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        margin-top: 8px;
+        background: rgba(124, 245, 198, 0.12);
+        color: var(--accent);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 20px;
+      }
+
+      .card {
+        background: var(--card);
+        border-radius: var(--radius);
+        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        box-shadow: var(--shadow);
+      }
+
+      .card h3 {
+        margin: 0 0 12px;
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+
+      .hero {
+        grid-column: span 7;
+        display: grid;
+        gap: 16px;
+      }
+
+      .hero-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .score-circle {
+        background: radial-gradient(circle, rgba(124, 245, 198, 0.18), rgba(19, 29, 40, 0.8) 60%);
+        border-radius: 20px;
+        padding: 18px;
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        gap: 10px;
+        border: 1px solid rgba(124, 245, 198, 0.2);
+        box-shadow: var(--glow);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .score-circle .score {
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--accent);
+      }
+
+      .score-circle span {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      .score-circle::after {
+        content: "";
+        position: absolute;
+        inset: -40%;
+        background: radial-gradient(circle, rgba(124, 245, 198, 0.12), transparent 60%);
+        opacity: 0.6;
+        animation: pulse 4s ease-in-out infinite;
+        pointer-events: none;
+      }
+
+      .score-circle.risk-high::after {
+        background: radial-gradient(circle, rgba(255, 107, 107, 0.16), transparent 60%);
+        animation-duration: 2.8s;
+      }
+
+      .score-circle.risk-mid::after {
+        background: radial-gradient(circle, rgba(243, 201, 105, 0.16), transparent 60%);
+        animation-duration: 3.4s;
+      }
+
+      .inputs {
+        display: grid;
+        gap: 12px;
+      }
+
+      .inputs label {
+        font-size: 0.8rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+      }
+
+      .inputs input {
+        width: 100%;
+        accent-color: var(--accent);
+      }
+
+      .predict {
+        grid-column: span 5;
+        display: grid;
+        gap: 12px;
+      }
+
+      .risk-box {
+        background: var(--card-2);
+        border-radius: 16px;
+        padding: 16px;
+        display: grid;
+        gap: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .risk-box h4 {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      .risk-box .risk-level {
+        font-size: 1.6rem;
+        font-weight: 600;
+      }
+
+      .risk-box .pill {
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        width: fit-content;
+      }
+
+      .pill.healthy {
+        background: rgba(124, 245, 198, 0.18);
+        color: var(--accent);
+      }
+
+      .pill.at-risk {
+        background: rgba(243, 201, 105, 0.2);
+        color: var(--warning);
+      }
+
+      .pill.danger {
+        background: rgba(255, 107, 107, 0.2);
+        color: var(--danger);
+      }
+
+      .chart-card {
+        grid-column: span 7;
+      }
+
+      .timeline {
+        grid-column: span 5;
+      }
+
+      canvas {
+        width: 100% !important;
+        height: 240px !important;
+      }
+
+      .breakdown {
+        margin-top: 8px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .breakdown-item {
+        display: grid;
+        gap: 6px;
+      }
+
+      .breakdown-header {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      .breakdown-bar {
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+      }
+
+      .breakdown-bar span {
+        display: block;
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--accent-2), var(--accent));
+        transition: width 0.3s ease;
+      }
+
+      .scrubber {
+        margin-top: 14px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .scrubber input {
+        width: 100%;
+      }
+
+      .scrubber-info {
+        font-size: 0.85rem;
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .heatmap {
+        margin-top: 14px;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 6px;
+      }
+
+      .heat-cell {
+        height: 24px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.06);
+        position: relative;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .heat-cell:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--glow);
+      }
+
+      .heat-tooltip {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(12, 20, 28, 0.95);
+        color: var(--ink);
+        padding: 6px 8px;
+        border-radius: 8px;
+        font-size: 0.75rem;
+        white-space: nowrap;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: none;
+        z-index: 10;
+      }
+
+      .heat-cell:hover .heat-tooltip {
+        display: block;
+      }
+
+      .load-bars {
+        display: grid;
+        gap: 10px;
+      }
+
+      .load-row {
+        display: grid;
+        gap: 8px;
+      }
+
+      .load-inputs {
+        display: grid;
+        grid-template-columns: 1fr 90px;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .load-inputs input[type="range"] {
+        width: 100%;
+        appearance: none;
+        background: transparent;
+        height: 18px;
+      }
+
+      .load-inputs input[type="range"]::-webkit-slider-runnable-track {
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .load-inputs input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #6aa5ff;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        margin-top: -5px;
+      }
+
+      .load-inputs input[type="range"]::-moz-range-track {
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .load-inputs input[type="range"]::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #6aa5ff;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+      }
+
+      .load-inputs input[type="number"] {
+        width: 100%;
+        padding: 6px 8px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(8, 14, 20, 0.8);
+        color: var(--ink);
+        font-family: inherit;
+      }
+
+      .hour-input {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 6px;
+        align-items: center;
+      }
+
+      .hour-input span {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      .load-bar {
+        height: 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+      }
+
+      .load-bar span {
+        display: block;
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--accent-2), var(--accent));
+      }
+
+      .recovery {
+        grid-column: span 12;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+
+      .coach-card {
+        background: var(--card-2);
+        border-radius: 16px;
+        padding: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .coach-card h4 {
+        margin: 0 0 8px;
+        font-size: 1rem;
+      }
+
+      .coach-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .streaks {
+        display: grid;
+        gap: 12px;
+      }
+
+      .recovery-suggestions {
+        margin-top: 10px;
+        display: grid;
+        gap: 6px;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      .suggested-timer {
+        margin-top: 8px;
+        font-size: 0.95rem;
+        color: var(--accent);
+        font-weight: 600;
+      }
+
+      .recovery-suggestions div {
+        padding: 6px 8px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(8, 14, 20, 0.6);
+      }
+
+      .streaks .value {
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--accent);
+      }
+
+      .streaks .sub {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      .guided-steps {
+        margin-top: 12px;
+        display: grid;
+        gap: 8px;
+      }
+
+      .guided-steps div {
+        padding: 8px 10px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: var(--muted);
+      }
+
+      .guided-steps .active {
+        color: var(--ink);
+        border-color: rgba(124, 245, 198, 0.4);
+        box-shadow: var(--glow);
+      }
+
+      .micro {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 10px;
+      }
+
+      .micro button {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: var(--ink);
+        padding: 10px 12px;
+        border-radius: 14px;
+        cursor: pointer;
+        transition: transform 0.2s ease, border 0.2s ease, box-shadow 0.2s ease;
+        font-family: inherit;
+      }
+
+      .micro button:hover {
+        transform: translateY(-2px);
+        border-color: rgba(124, 245, 198, 0.4);
+        box-shadow: var(--glow);
+      }
+
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(6, 10, 14, 0.7);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        z-index: 20;
+      }
+
+      .modal.active {
+        display: flex;
+      }
+
+      .modal-card {
+        background: var(--card);
+        border-radius: 20px;
+        padding: 24px;
+        max-width: 420px;
+        width: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: var(--shadow);
+        display: grid;
+        gap: 12px;
+      }
+
+      .modal-card h4 {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+
+      .modal-card p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .modal-row {
+        display: grid;
+        gap: 8px;
+      }
+
+      .modal-row input {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(8, 14, 20, 0.8);
+        color: var(--ink);
+        font-family: inherit;
+      }
+
+      .modal-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .modal-actions button {
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: transparent;
+        color: var(--ink);
+        cursor: pointer;
+        font-family: inherit;
+      }
+
+      .modal-actions button.primary {
+        background: linear-gradient(135deg, rgba(124, 245, 198, 0.25), rgba(70, 166, 255, 0.2));
+        border-color: rgba(124, 245, 198, 0.4);
+      }
+
+      .timer-status {
+        margin-top: 8px;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      .timer-pop {
+        display: none;
+      }
+
+      .alert-pop {
+        position: fixed;
+        left: 24px;
+        bottom: 24px;
+        background: rgba(40, 8, 8, 0.92);
+        border: 1px solid rgba(255, 107, 107, 0.6);
+        box-shadow: var(--shadow);
+        border-radius: 16px;
+        padding: 12px 14px;
+        min-width: 220px;
+        display: none;
+        gap: 6px;
+        z-index: 35;
+      }
+
+      .alert-pop.active {
+        display: grid;
+      }
+
+      .alert-pop .label {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        color: #ff9f9f;
+      }
+
+      .alert-pop .message {
+        font-size: 0.95rem;
+        color: #ffe6e6;
+      }
+
+      .exercise-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(6, 10, 14, 0.7);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        z-index: 45;
+      }
+
+      .exercise-modal.active {
+        display: flex;
+      }
+
+      .exercise-card {
+        width: min(520px, 94vw);
+        background: var(--card);
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        display: grid;
+        gap: 12px;
+        text-align: center;
+      }
+
+      .exercise-card h3 {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+
+      .exercise-card .meta {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .exercise-card .timer-big {
+        font-size: 2.4rem;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 1px;
+      }
+
+      .exercise-close {
+        justify-self: center;
+        padding: 8px 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: transparent;
+        color: var(--ink);
+        cursor: pointer;
+        font-family: inherit;
+      }
+
+      .exercise-anim {
+        height: 180px;
+        display: grid;
+        place-items: center;
+      }
+
+      .anim-breathe {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(124, 245, 198, 0.35), rgba(70, 166, 255, 0.1));
+        animation: breathe 6s ease-in-out infinite;
+      }
+
+      .anim-eyes {
+        width: 140px;
+        height: 60px;
+        border-radius: 999px;
+        border: 2px solid rgba(124, 245, 198, 0.6);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .anim-eyes::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(124, 245, 198, 0.4);
+        animation: blink 4s ease-in-out infinite;
+      }
+
+      .anim-reset {
+        width: 160px;
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+      }
+
+      .anim-reset span {
+        display: block;
+        height: 100%;
+        width: 40%;
+        background: linear-gradient(90deg, var(--accent-2), var(--accent));
+        animation: focusMove 2.4s ease-in-out infinite;
+      }
+
+      .anim-nap {
+        font-size: 2rem;
+        color: var(--accent);
+        animation: drift 3s ease-in-out infinite;
+      }
+
+      .chat {
+        display: grid;
+        gap: 12px;
+      }
+
+      .chat-messages {
+        background: rgba(8, 14, 20, 0.6);
+        border-radius: 16px;
+        padding: 16px;
+        height: 260px;
+        overflow-y: auto;
+        display: grid;
+        gap: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .bubble {
+        padding: 10px 12px;
+        border-radius: 14px;
+        max-width: 80%;
+        line-height: 1.4;
+        font-size: 0.95rem;
+      }
+
+      .bubble.user {
+        justify-self: end;
+        background: rgba(70, 166, 255, 0.2);
+        border: 1px solid rgba(70, 166, 255, 0.4);
+      }
+
+      .bubble.assistant {
+        justify-self: start;
+        background: rgba(124, 245, 198, 0.16);
+        border: 1px solid rgba(124, 245, 198, 0.3);
+      }
+
+      .chat-form {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        gap: 10px;
+      }
+
+      .chat-form input {
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(8, 14, 20, 0.8);
+        color: var(--ink);
+        font-family: inherit;
+      }
+
+      .chat-form button {
+        padding: 10px 14px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: linear-gradient(135deg, rgba(124, 245, 198, 0.25), rgba(70, 166, 255, 0.2));
+        color: var(--ink);
+        cursor: pointer;
+        font-family: inherit;
+      }
+
+      .chat-form button.secondary {
+        background: transparent;
+        border-color: rgba(255, 255, 255, 0.12);
+      }
+
+      .chat-status {
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+
+      .chat-fab {
+        position: fixed;
+        right: 24px;
+        bottom: 90px;
+        background: linear-gradient(135deg, rgba(124, 245, 198, 0.3), rgba(70, 166, 255, 0.25));
+        color: var(--ink);
+        border: 1px solid rgba(124, 245, 198, 0.5);
+        border-radius: 999px;
+        padding: 12px 18px;
+        cursor: pointer;
+        box-shadow: var(--shadow);
+        z-index: 25;
+        font-family: inherit;
+      }
+
+      .chat-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(6, 10, 14, 0.7);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        z-index: 40;
+      }
+
+      .chat-modal.active {
+        display: flex;
+      }
+
+      .chat-panel {
+        width: min(720px, 96vw);
+        background: var(--card);
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        display: grid;
+        gap: 12px;
+      }
+
+      .chat-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .chat-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+      }
+
+      .chat-close {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: var(--ink);
+        padding: 6px 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-family: inherit;
+      }
+
+      .signin-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(6, 10, 14, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        z-index: 60;
+      }
+
+      .signin-card {
+        width: min(460px, 94vw);
+        background: var(--card);
+        border-radius: 20px;
+        padding: 22px;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        display: grid;
+        gap: 12px;
+      }
+
+      .signin-card h3 {
+        margin: 0;
+        font-size: 1.4rem;
+      }
+
+      .signin-card p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .signin-card input {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(8, 14, 20, 0.8);
+        color: var(--ink);
+        font-family: inherit;
+      }
+
+      .signin-card button {
+        padding: 10px 14px;
+        border-radius: 12px;
+        border: 1px solid rgba(124, 245, 198, 0.4);
+        background: linear-gradient(135deg, rgba(124, 245, 198, 0.25), rgba(70, 166, 255, 0.2));
+        color: var(--ink);
+        cursor: pointer;
+        font-family: inherit;
+      }
+
+      .signin-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .signin-actions button.secondary {
+        background: transparent;
+        border-color: rgba(255, 255, 255, 0.12);
+      }
+
+      .signin-error {
+        color: #ff9f9f;
+        font-size: 0.85rem;
+      }
+
+      .checkin-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(6, 10, 14, 0.8);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        z-index: 65;
+      }
+
+      .checkin-modal.active {
+        display: flex;
+      }
+
+      .checkin-card {
+        width: min(520px, 96vw);
+        background: var(--card);
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        display: grid;
+        gap: 12px;
+      }
+
+      .checkin-card h3 {
+        margin: 0;
+        font-size: 1.3rem;
+      }
+
+      .checkin-card label {
+        font-size: 0.8rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+      }
+
+      .checkin-card input,
+      .checkin-card select {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(8, 14, 20, 0.8);
+        color: var(--ink);
+        font-family: inherit;
+      }
+
+      .checkin-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .checkin-actions button {
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: transparent;
+        color: var(--ink);
+        cursor: pointer;
+        font-family: inherit;
+      }
+
+      .checkin-actions button.primary {
+        background: linear-gradient(135deg, rgba(124, 245, 198, 0.25), rgba(70, 166, 255, 0.2));
+        border-color: rgba(124, 245, 198, 0.4);
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(0.9);
+          opacity: 0.6;
+        }
+        50% {
+          transform: scale(1.05);
+          opacity: 0.9;
+        }
+      }
+
+      @keyframes breathe {
+        0%,
+        100% {
+          transform: scale(0.85);
+          opacity: 0.6;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 1;
+        }
+      }
+
+      @keyframes blink {
+        0%,
+        90%,
+        100% {
+          transform: translateY(0%);
+        }
+        92%,
+        98% {
+          transform: translateY(100%);
+        }
+      }
+
+      @keyframes focusMove {
+        0%,
+        100% {
+          transform: translateX(0%);
+        }
+        50% {
+          transform: translateX(150%);
+        }
+      }
+
+      @keyframes drift {
+        0%,
+        100% {
+          transform: translateY(0px);
+          opacity: 0.7;
+        }
+        50% {
+          transform: translateY(-8px);
+          opacity: 1;
+        }
+      }
+
+      footer {
+        color: var(--muted);
+        font-size: 0.85rem;
+        text-align: center;
+        margin-top: 8px;
+      }
+
+      @media (max-width: 960px) {
+        header {
+          grid-template-columns: 1fr;
+        }
+
+        .hero,
+        .predict,
+        .chart-card,
+        .timeline {
+          grid-column: span 12;
+        }
+
+        .hero-inner {
+          grid-template-columns: 1fr;
+        }
+
+        .recovery {
+          grid-template-columns: 1fr;
+        }
+
+        .micro {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <div class="title-card">
+          <div class="welcome-text" id="welcomeText">Welcome back.</div>
+          <h1>MindPulse</h1>
+          <p>
+            Cognitive Burnout & Recovery Intelligence Platform. Track mental overload,
+            predict burnout risk, and get precision recovery moves before your energy dips.
+          </p>
+          <p class="tagline">Your brain’s vitals—decoded here.</p>
+          <div class="checkin-row">
+            <button id="openCheckin">Daily Check-In</button>
+            <span id="lastCheckin">Last check-in: not today</span>
+          </div>
+        </div>
+        <div class="header-metrics">
+          <div class="metric-card">
+            <h4>Mental Recovery Index</h4>
+            <div class="value" id="mriValue">78</div>
+            <div class="status" id="mriStatus">Stable + Recovering</div>
+          </div>
+          <div class="metric-card">
+            <h4>7-Day Forecast</h4>
+            <div class="value" id="forecastValue">Low Risk</div>
+            <div class="status" id="confidenceStatus">AI Confidence 86%</div>
+          </div>
+        </div>
+      </header>
+      <div class="signin-pill" id="signinPill">
+        <span id="signinText">Not signed in</span>
+        <button id="logoutBtn" style="display: none">Logout</button>
+      </div>
+
+      <section class="grid">
+        <div class="card hero">
+          <h3>🧠 Mental Recovery Index (MRI)</h3>
+          <div class="hero-inner">
+            <div class="score-circle" id="scoreCircleShell">
+              <div class="score" id="scoreCircle">78</div>
+              <span>Composite score (0–100)</span>
+            </div>
+            <div class="inputs">
+              <div>
+                <label>Sleep Quality</label>
+                <input type="range" min="1" max="10" value="7" id="sleep" />
+              </div>
+              <div>
+                <label>Screen Switching</label>
+                <input type="range" min="1" max="10" value="6" id="switching" />
+              </div>
+              <div>
+                <label>Self-Reported Stress</label>
+                <input type="range" min="1" max="10" value="5" id="stress" />
+              </div>
+              <div>
+                <label>Workload Intensity</label>
+                <input type="range" min="1" max="10" value="6" id="workload" />
+              </div>
+              <div>
+                <label>HRV (Optional)</label>
+                <input type="range" min="1" max="10" value="6" id="hrv" />
+              </div>
+              <div class="breakdown" id="breakdownPanel"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card predict">
+          <h3>🔮 Burnout Prediction Engine</h3>
+          <div class="risk-box">
+            <h4>Today’s Risk</h4>
+            <div class="risk-level" id="riskLevel">At Risk</div>
+            <div class="pill at-risk" id="riskPill">🟡 At Risk</div>
+          </div>
+          <div class="risk-box">
+            <h4>7-Day Trajectory</h4>
+            <canvas id="forecastChart"></canvas>
+          </div>
+        </div>
+
+        <div class="card chart-card">
+          <h3>📈 Weekly Wellness Trend</h3>
+          <canvas id="weeklyChart"></canvas>
+          <div class="scrubber">
+            <div class="scrubber-info">
+              <span>Timeline scrubber</span>
+              <span id="scrubTime">3:00 PM</span>
+            </div>
+            <input type="range" min="0" max="23" value="15" id="timeScrubber" />
+          </div>
+        </div>
+
+        <div class="card timeline">
+          <h3>⏳ Cognitive Load Timeline</h3>
+          <div class="load-bars">
+            <div class="load-row">
+              <div>Deep Work</div>
+              <div class="load-bar"><span id="deepWorkBar" style="width: 72%"></span></div>
+              <div class="load-inputs">
+                <input type="range" min="0" max="100" value="72" id="deepWork" />
+                <div class="hour-input">
+                  <input type="number" min="0" max="12" value="4" id="deepWorkHours" />
+                  <span>hrs</span>
+                </div>
+              </div>
+            </div>
+            <div class="load-row">
+              <div>Context Switching</div>
+              <div class="load-bar"><span id="contextBar" style="width: 58%"></span></div>
+              <div class="load-inputs">
+                <input type="range" min="0" max="100" value="58" id="contextSwitching" />
+                <div class="hour-input">
+                  <input type="number" min="0" max="12" value="3" id="contextHours" />
+                  <span>hrs</span>
+                </div>
+              </div>
+            </div>
+            <div class="load-row">
+              <div>Recovery Breaks</div>
+              <div class="load-bar"><span id="recoveryBar" style="width: 43%"></span></div>
+              <div class="load-inputs">
+                <input type="range" min="0" max="100" value="43" id="recoveryBreaks" />
+                <div class="hour-input">
+                  <input type="number" min="0" max="12" value="2" id="recoveryHours" />
+                  <span>hrs</span>
+                </div>
+              </div>
+            </div>
+            <div class="load-row">
+              <div>Overload Hours</div>
+              <div class="load-bar"><span id="overloadBar" style="width: 64%"></span></div>
+              <div class="load-inputs">
+                <input type="range" min="0" max="100" value="64" id="overloadHours" />
+                <div class="hour-input">
+                  <input type="number" min="0" max="12" value="4" id="overloadHoursCount" />
+                  <span>hrs</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="heatmap" id="heatmapGrid"></div>
+        </div>
+
+        <div class="card recovery">
+          <div class="coach-card">
+            <h4>🎯 Personalized Recovery Coach</h4>
+            <p id="coachTip">
+              You need a 17-minute low-stimulus break. Avoid decision-heavy tasks after 6 PM today.
+            </p>
+          </div>
+          <div class="coach-card">
+            <h4>📌 Focused Micro-Interventions</h4>
+            <p>Quick resets that match your current cognitive load.</p>
+            <div class="micro">
+              <button data-action="breathe">60-sec breathing</button>
+              <button data-action="eyes">Eye relaxation</button>
+              <button data-action="reset">Focus reset</button>
+              <button data-action="nap">Power nap</button>
+            </div>
+            <div class="timer-status" id="timerStatus">No active recovery timer.</div>
+            <div class="guided-steps" id="guidedSteps">
+              <div class="active">Select a recovery move to start guided steps.</div>
+            </div>
+          </div>
+          <div class="coach-card">
+            <h4>⚡ Recovery Moves Now</h4>
+            <p id="recoveryNow">Hydration + 5-minute walk recommended now.</p>
+            <div class="suggested-timer" id="suggestedTimer">Suggested timer: 10 min</div>
+            <div class="recovery-suggestions" id="recoverySuggestions">
+              <div>Breathing reset — 1–2 min</div>
+              <div>Low-stimulus break — 12–18 min</div>
+              <div>Power nap — 15–20 min</div>
+            </div>
+            <div class="streaks">
+              <div>
+                <div class="value" id="streakValue">0</div>
+                <div class="sub">Recovery streak (completed timers)</div>
+              </div>
+              <div class="sub" id="streakHint">Complete a session to start your streak.</div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <footer>MindPulse Prototype • AI-powered burnout prediction & recovery insights</footer>
+    </div>
+
+    <div class="modal" id="timerModal" aria-hidden="true">
+      <div class="modal-card">
+        <h4 id="modalTitle">Set Recovery Timer</h4>
+        <p id="modalSubtitle">Choose how long you want this intervention to run.</p>
+        <div class="modal-row">
+          <label for="timerMinutes">Duration (minutes)</label>
+          <input type="number" id="timerMinutes" min="1" max="90" value="5" />
+        </div>
+        <div class="modal-actions">
+          <button id="cancelTimer">Cancel</button>
+          <button class="primary" id="startTimer">Start Timer</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="timer-pop" id="timerPop"></div>
+
+    <div class="alert-pop" id="alertPop">
+      <div class="label" id="alertLabel">Hydration Alert</div>
+      <div class="message" id="alertMessage">Water intake below target.</div>
+    </div>
+
+    <div class="exercise-modal" id="exerciseModal" aria-hidden="true">
+      <div class="exercise-card">
+        <h3 id="exerciseTitle">Breathing Reset</h3>
+        <div class="timer-big" id="exerciseTimer">00:00</div>
+        <div class="meta" id="exerciseMeta">Timer running</div>
+        <div class="exercise-anim" id="exerciseAnim"></div>
+        <button class="exercise-close" id="exerciseClose">Hide</button>
+      </div>
+    </div>
+
+    <div class="signin-modal" id="signinModal">
+      <div class="signin-card">
+        <h3>Sign in to MindPulse</h3>
+        <p>Use your Gmail, username, and password.</p>
+        <input type="text" id="signinName" placeholder="Username" />
+        <input type="email" id="signinEmail" placeholder="Gmail address" />
+        <input type="password" id="signinPassword" placeholder="Password" />
+        <div class="signin-error" id="signinError"></div>
+        <div class="signin-actions">
+          <button class="secondary" id="signupSubmit">Create account</button>
+          <button id="signinSubmit">Sign in</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="checkin-modal" id="checkinModal" aria-hidden="true">
+      <div class="checkin-card">
+        <h3>Daily Check-In</h3>
+        <label for="checkinMood">Mood</label>
+        <select id="checkinMood">
+          <option value="5">Great</option>
+          <option value="4">Good</option>
+          <option value="3">Okay</option>
+          <option value="2">Low</option>
+          <option value="1">Very Low</option>
+        </select>
+        <label for="checkinSleep">Sleep (hours)</label>
+        <input type="number" min="0" max="12" value="7" id="checkinSleep" />
+        <label for="checkinStress">Stress (1–10)</label>
+        <input type="range" min="1" max="10" value="5" id="checkinStress" />
+        <label for="checkinWorkload">Workload (1–10)</label>
+        <input type="range" min="1" max="10" value="6" id="checkinWorkload" />
+        <label for="checkinWater">Water intake (litres)</label>
+        <input type="number" min="0" max="10" step="0.1" value="2.0" id="checkinWater" />
+        <div class="checkin-actions">
+          <button id="cancelCheckin">Cancel</button>
+          <button class="primary" id="saveCheckin">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="chat-fab" id="chatFab">Chat with MindPulse</button>
+    <div class="chat-modal" id="chatModal" aria-hidden="true">
+      <div class="chat-panel">
+        <div class="chat-header">
+          <h3>🤖 MindPulse AI Assistant</h3>
+          <button class="chat-close" id="chatClose">Close</button>
+        </div>
+        <div class="chat">
+          <div class="chat-messages" id="chatMessages">
+            <div class="bubble assistant">
+              Hi! I’m MindPulse. Tell me how you’re feeling, and I’ll suggest a recovery move.
+            </div>
+          </div>
+          <form class="chat-form" id="chatForm">
+            <input
+              id="chatInput"
+              type="text"
+              placeholder="Ask about stress, recovery, or burnout risk..."
+              autocomplete="off"
+            />
+            <button type="button" class="secondary" id="micToggle">Mic</button>
+            <button type="submit">Send</button>
+          </form>
+          <div class="chat-status" id="chatStatus">Connected to AI backend.</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const inputs = ["sleep", "switching", "stress", "workload", "hrv"].map(
+        (id) => document.getElementById(id)
+      );
+      const mriValue = document.getElementById("mriValue");
+      const forecastValue = document.getElementById("forecastValue");
+      const scoreCircle = document.getElementById("scoreCircle");
+      const riskLevel = document.getElementById("riskLevel");
+      const riskPill = document.getElementById("riskPill");
+      const coachTip = document.getElementById("coachTip");
+      const recoveryNow = document.getElementById("recoveryNow");
+      const recoverySuggestions = document.getElementById("recoverySuggestions");
+      const suggestedTimer = document.getElementById("suggestedTimer");
+      const mriStatus = document.getElementById("mriStatus");
+      const timerModal = document.getElementById("timerModal");
+      const timerMinutes = document.getElementById("timerMinutes");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalSubtitle = document.getElementById("modalSubtitle");
+      const cancelTimer = document.getElementById("cancelTimer");
+      const startTimer = document.getElementById("startTimer");
+      const timerStatus = document.getElementById("timerStatus");
+      const timerPop = document.getElementById("timerPop");
+      const alertPop = document.getElementById("alertPop");
+      const alertLabel = document.getElementById("alertLabel");
+      const alertMessage = document.getElementById("alertMessage");
+      const exerciseModal = document.getElementById("exerciseModal");
+      const exerciseTitle = document.getElementById("exerciseTitle");
+      const exerciseMeta = document.getElementById("exerciseMeta");
+      const exerciseAnim = document.getElementById("exerciseAnim");
+      const exerciseClose = document.getElementById("exerciseClose");
+      const exerciseTimer = document.getElementById("exerciseTimer");
+      const deepWork = document.getElementById("deepWork");
+      const deepWorkHours = document.getElementById("deepWorkHours");
+      const contextSwitching = document.getElementById("contextSwitching");
+      const contextHours = document.getElementById("contextHours");
+      const recoveryBreaks = document.getElementById("recoveryBreaks");
+      const recoveryHours = document.getElementById("recoveryHours");
+      const overloadHours = document.getElementById("overloadHours");
+      const overloadHoursCount = document.getElementById("overloadHoursCount");
+      const deepWorkBar = document.getElementById("deepWorkBar");
+      const contextBar = document.getElementById("contextBar");
+      const recoveryBar = document.getElementById("recoveryBar");
+      const overloadBar = document.getElementById("overloadBar");
+      const chatMessages = document.getElementById("chatMessages");
+      const chatForm = document.getElementById("chatForm");
+      const chatInput = document.getElementById("chatInput");
+      const chatStatus = document.getElementById("chatStatus");
+      const micToggle = document.getElementById("micToggle");
+      const chatFab = document.getElementById("chatFab");
+      const chatModal = document.getElementById("chatModal");
+      const chatClose = document.getElementById("chatClose");
+      const signinModal = document.getElementById("signinModal");
+      const signinName = document.getElementById("signinName");
+      const signinEmail = document.getElementById("signinEmail");
+      const signinPassword = document.getElementById("signinPassword");
+      const signinSubmit = document.getElementById("signinSubmit");
+      const signupSubmit = document.getElementById("signupSubmit");
+      const signinError = document.getElementById("signinError");
+      const signinPill = document.getElementById("signinPill");
+      const signinText = document.getElementById("signinText");
+      const logoutBtn = document.getElementById("logoutBtn");
+      const welcomeText = document.getElementById("welcomeText");
+      const openCheckin = document.getElementById("openCheckin");
+      const checkinModal = document.getElementById("checkinModal");
+      const cancelCheckin = document.getElementById("cancelCheckin");
+      const saveCheckin = document.getElementById("saveCheckin");
+      const checkinMood = document.getElementById("checkinMood");
+      const checkinSleep = document.getElementById("checkinSleep");
+      const checkinStress = document.getElementById("checkinStress");
+      const checkinWorkload = document.getElementById("checkinWorkload");
+      const checkinWater = document.getElementById("checkinWater");
+      const lastCheckin = document.getElementById("lastCheckin");
+      const API_BASE = "http://127.0.0.1:5050";
+      const API_URL = `${API_BASE}/predict`;
+      const CHAT_URL = `${API_BASE}/chat`;
+      const SIGNUP_URL = `${API_BASE}/auth/signup`;
+      const LOGIN_URL = `${API_BASE}/auth/login`;
+
+      function calculateMRI() {
+        const sleep = Number(inputs[0].value);
+        const switching = Number(inputs[1].value);
+        const stress = Number(inputs[2].value);
+        const workload = Number(inputs[3].value);
+        const hrv = Number(inputs[4].value);
+
+        const score =
+          100 -
+          (switching * 4 + stress * 5 + workload * 4) +
+          (sleep * 5 + hrv * 3);
+        return Math.max(0, Math.min(100, Math.round(score)));
+      }
+
+      function setRiskUI() {
+        const score = calculateMRI();
+        mriValue.textContent = score;
+        scoreCircle.textContent = score;
+        syncLoadBars();
+
+        if (score >= 75) {
+          mriStatus.textContent = "Strong + Steady";
+          riskLevel.textContent = "Healthy";
+          riskPill.className = "pill healthy";
+          riskPill.textContent = "🟢 Healthy";
+          coachTip.textContent =
+            "You can push, but keep a 12-minute reset break every 2 hours.";
+          recoveryNow.textContent = "Hydration + light stretching recommended now.";
+          suggestedTimer.textContent = "Suggested timer: 10 min";
+          recoverySuggestions.innerHTML = `
+            <div>Breathing reset — 1–2 min</div>
+            <div>Light stretch — 5–8 min</div>
+            <div>Low-stimulus break — 10–12 min</div>
+          `;
+        } else if (score >= 55) {
+          mriStatus.textContent = "Stable + Recovering";
+          riskLevel.textContent = "At Risk";
+          riskPill.className = "pill at-risk";
+          riskPill.textContent = "🟡 At Risk";
+          coachTip.textContent =
+            "You need a 17-minute low-stimulus break. Avoid decision-heavy tasks after 6 PM today.";
+          recoveryNow.textContent =
+            "Step away from screens for 8 minutes and take 10 slow breaths.";
+          suggestedTimer.textContent = "Suggested timer: 15 min";
+          recoverySuggestions.innerHTML = `
+            <div>Box breathing — 2–3 min</div>
+            <div>Screen-free break — 8–12 min</div>
+            <div>Walk + water — 10–15 min</div>
+          `;
+        } else {
+          mriStatus.textContent = "Overloaded + Drained";
+          riskLevel.textContent = "Burnout Incoming";
+          riskPill.className = "pill danger";
+          riskPill.textContent = "🔴 Burnout Incoming";
+          coachTip.textContent =
+            "Block 45 minutes for recovery, reduce workload intensity, and delay complex tasks.";
+          recoveryNow.textContent =
+            "Power nap suggestion: 18 minutes with a quiet timer.";
+          suggestedTimer.textContent = "Suggested timer: 20 min";
+          recoverySuggestions.innerHTML = `
+            <div>Low-stimulus reset — 15–20 min</div>
+            <div>Power nap — 15–20 min</div>
+            <div>Deep recovery — 30–45 min</div>
+          `;
+        }
+      }
+
+      function applyPrediction(prediction) {
+        if (!prediction) return;
+        if (typeof prediction.mri === "number") {
+          mriValue.textContent = prediction.mri;
+          scoreCircle.textContent = prediction.mri;
+        }
+
+        if (prediction.forecast_label) {
+          forecastValue.textContent = prediction.forecast_label;
+        }
+
+        if (prediction.confidence != null) {
+          const confidence = Math.round(prediction.confidence * 100);
+          const status = document.getElementById("confidenceStatus");
+          if (status) status.textContent = `AI Confidence ${confidence}%`;
+        }
+
+        if (prediction.risk) {
+          riskLevel.textContent = prediction.risk.label;
+          riskPill.className = `pill ${prediction.risk.level}`;
+          riskPill.textContent = prediction.risk.pill;
+        }
+
+        if (prediction.coach_tip) {
+          coachTip.textContent = prediction.coach_tip;
+        }
+
+        if (prediction.recovery_now) {
+          recoveryNow.textContent = prediction.recovery_now;
+        }
+
+        if (prediction.weekly) {
+          weeklyChart.data.labels = prediction.weekly.labels;
+          weeklyChart.data.datasets[0].data = prediction.weekly.mri;
+          weeklyChart.data.datasets[1].data = prediction.weekly.load;
+          weeklyChart.update();
+        }
+
+        if (Array.isArray(prediction.forecast)) {
+          forecastChart.data.datasets[0].data = prediction.forecast;
+          forecastChart.update();
+        }
+      }
+
+      function buildPayload() {
+        return {
+          sleep: Number(inputs[0].value),
+          switching: Number(inputs[1].value),
+          stress: Number(inputs[2].value),
+          workload: Number(inputs[3].value),
+          hrv: Number(inputs[4].value),
+          deep_work: Number(deepWork.value),
+          deep_work_hours: Number(deepWorkHours.value),
+          context_switching: Number(contextSwitching.value),
+          context_hours: Number(contextHours.value),
+          recovery_breaks: Number(recoveryBreaks.value),
+          recovery_hours: Number(recoveryHours.value),
+          overload_hours: Number(overloadHours.value),
+          overload_hours_count: Number(overloadHoursCount.value),
+        };
+      }
+
+      async function fetchPrediction() {
+        try {
+          const response = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(buildPayload()),
+          });
+          if (!response.ok) return;
+          const data = await response.json();
+          applyPrediction(data);
+        } catch (error) {
+          // Silent fallback to local computation when API is unavailable.
+        }
+      }
+
+      let debounceTimer;
+      function updateInsights() {
+        setRiskUI();
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(fetchPrediction, 250);
+        updateLocalCharts();
+      }
+
+      inputs.forEach((input) => input.addEventListener("input", updateInsights));
+      const loadPairs = [
+        { slider: deepWork, hours: deepWorkHours },
+        { slider: contextSwitching, hours: contextHours },
+        { slider: recoveryBreaks, hours: recoveryHours },
+        { slider: overloadHours, hours: overloadHoursCount },
+      ];
+
+      function sliderToHours(value) {
+        return Math.round((Number(value) / 100) * 12);
+      }
+
+      function hoursToSlider(value) {
+        return Math.round((Number(value) / 12) * 100);
+      }
+
+      loadPairs.forEach(({ slider, hours }) => {
+        slider.addEventListener("input", () => {
+          hours.value = sliderToHours(slider.value);
+          syncLoadBars();
+          updateInsights();
+        });
+
+        hours.addEventListener("input", () => {
+          const clamped = Math.max(0, Math.min(12, Number(hours.value)));
+          hours.value = clamped;
+          slider.value = hoursToSlider(clamped);
+          syncLoadBars();
+          updateInsights();
+        });
+      });
+
+      function syncLoadBars() {
+        deepWorkBar.style.width = `${deepWork.value}%`;
+        contextBar.style.width = `${contextSwitching.value}%`;
+        recoveryBar.style.width = `${recoveryBreaks.value}%`;
+        overloadBar.style.width = `${overloadHours.value}%`;
+      }
+
+      function updateLocalCharts() {
+        const baseMRI = calculateMRI();
+        const riskBase =
+          100 -
+          baseMRI +
+          Number(contextSwitching.value) * 0.12 +
+          Number(overloadHours.value) * 0.18 -
+          Number(recoveryBreaks.value) * 0.1;
+
+        const weeklyMRI = weeklyChart.data.datasets[0].data.map((_, idx) => {
+          const drift = Math.sin((idx / 7) * Math.PI * 2) * 4;
+          const adjust =
+            Number(deepWork.value) * 0.04 -
+            Number(contextSwitching.value) * 0.05 +
+            Number(recoveryBreaks.value) * 0.03 -
+            Number(overloadHours.value) * 0.06;
+          return Math.max(0, Math.min(100, Math.round(baseMRI + drift + adjust)));
+        });
+
+        const weeklyLoad = weeklyChart.data.datasets[1].data.map((_, idx) => {
+          const drift = Math.cos((idx / 7) * Math.PI * 2) * 4;
+          const adjust =
+            Number(overloadHours.value) * 0.2 +
+            Number(contextSwitching.value) * 0.15 -
+            Number(recoveryBreaks.value) * 0.1;
+          return Math.max(0, Math.min(100, Math.round(100 - baseMRI + drift + adjust)));
+        });
+
+        weeklyChart.data.datasets[0].data = weeklyMRI;
+        weeklyChart.data.datasets[1].data = weeklyLoad;
+        weeklyChart.update();
+
+        const forecast = forecastChart.data.datasets[0].data.map((_, idx) => {
+          const drift = idx * 3;
+          return Math.max(0, Math.min(100, Math.round(riskBase + drift)));
+        });
+        forecastChart.data.datasets[0].data = forecast;
+        forecastChart.update();
+      }
+
+      const weeklyCtx = document.getElementById("weeklyChart").getContext("2d");
+      const forecastCtx = document.getElementById("forecastChart").getContext("2d");
+
+      const weeklyChart = new Chart(weeklyCtx, {
+        type: "line",
+        data: {
+          labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          datasets: [
+            {
+              label: "Mental Recovery Index",
+              data: [72, 68, 70, 65, 75, 80, 78],
+              borderColor: "#7cf5c6",
+              backgroundColor: "rgba(124, 245, 198, 0.15)",
+              tension: 0.35,
+              fill: true,
+            },
+            {
+              label: "Cognitive Load",
+              data: [58, 60, 62, 68, 55, 50, 54],
+              borderColor: "#46a6ff",
+              backgroundColor: "rgba(70, 166, 255, 0.12)",
+              tension: 0.35,
+              fill: true,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { labels: { color: "#c6d6e6" } },
+          },
+          scales: {
+            x: { ticks: { color: "#9fb3c8" }, grid: { color: "rgba(255,255,255,0.05)" } },
+            y: { ticks: { color: "#9fb3c8" }, grid: { color: "rgba(255,255,255,0.05)" } },
+          },
+        },
+      });
+
+      const forecastChart = new Chart(forecastCtx, {
+        type: "bar",
+        data: {
+          labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"],
+          datasets: [
+            {
+              label: "Burnout Risk Score",
+              data: [42, 48, 53, 57, 61, 66, 62],
+              backgroundColor: [
+                "rgba(124, 245, 198, 0.7)",
+                "rgba(124, 245, 198, 0.7)",
+                "rgba(243, 201, 105, 0.7)",
+                "rgba(243, 201, 105, 0.7)",
+                "rgba(255, 107, 107, 0.7)",
+                "rgba(255, 107, 107, 0.7)",
+                "rgba(243, 201, 105, 0.7)",
+              ],
+              borderRadius: 10,
+            },
+          ],
+        },
+        options: {
+          plugins: {
+            legend: { labels: { color: "#c6d6e6" } },
+          },
+          scales: {
+            x: { ticks: { color: "#9fb3c8" }, grid: { color: "rgba(255,255,255,0.05)" } },
+            y: { ticks: { color: "#9fb3c8" }, grid: { color: "rgba(255,255,255,0.05)" } },
+          },
+        },
+      });
+
+      document.querySelectorAll(".micro button").forEach((button) => {
+        button.addEventListener("click", () => {
+          const action = button.dataset.action;
+          const messages = {
+            breathe: "Starting 60-second breathing. Inhale 4, hold 4, exhale 6.",
+            eyes: "Relax your gaze for 45 seconds and blink slowly.",
+            reset: "Focus reset: write the single next action before continuing.",
+            nap: "Power nap: 18 minutes. Set a timer and dim the lights.",
+          };
+          openTimerModal(action, messages[action]);
+        });
+      });
+
+      updateInsights();
+
+      let activeTimer = null;
+      let activeAction = null;
+
+      function openTimerModal(action, subtitle) {
+        activeAction = action;
+        modalTitle.textContent = `Set ${actionLabel(action)} Timer`;
+        modalSubtitle.textContent = subtitle;
+        timerMinutes.value = "";
+        coachTip.textContent = `Set your ${actionLabel(action).toLowerCase()} timer and commit fully.`;
+        timerModal.classList.add("active");
+        timerModal.setAttribute("aria-hidden", "false");
+      }
+
+      function closeTimerModal() {
+        timerModal.classList.remove("active");
+        timerModal.setAttribute("aria-hidden", "true");
+      }
+
+      function actionLabel(action) {
+        const labels = {
+          breathe: "Breathing",
+          eyes: "Eye Relaxation",
+          reset: "Focus Reset",
+          nap: "Power Nap",
+        };
+        return labels[action] || "Recovery";
+      }
+
+      function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+      }
+
+      function startCountdown(minutes) {
+        const totalSeconds = Math.max(1, Math.round(minutes * 60));
+        let remaining = totalSeconds;
+        timerStatus.textContent = `${actionLabel(activeAction)} timer: ${formatTime(remaining)}`;
+        coachTip.textContent = `${actionLabel(activeAction)} active for ${minutes} min. Stay with it, no multitasking.`;
+        openExerciseModal(activeAction, minutes);
+        exerciseTimer.textContent = formatTime(remaining);
+        exerciseMeta.textContent = `Timer running`;
+
+        if (activeTimer) {
+          clearInterval(activeTimer);
+        }
+
+        activeTimer = setInterval(() => {
+          remaining -= 1;
+          if (remaining <= 0) {
+            clearInterval(activeTimer);
+            activeTimer = null;
+            timerStatus.textContent = `${actionLabel(activeAction)} completed. Great job!`;
+            recoveryNow.textContent = "Recovery move completed. Ready for the next focus block.";
+            closeExerciseModal();
+            return;
+          }
+          timerStatus.textContent = `${actionLabel(activeAction)} timer: ${formatTime(remaining)}`;
+          exerciseTimer.textContent = formatTime(remaining);
+        }, 1000);
+      }
+
+      cancelTimer.addEventListener("click", () => {
+        closeTimerModal();
+      });
+
+      timerModal.addEventListener("click", (event) => {
+        if (event.target === timerModal) {
+          closeTimerModal();
+        }
+      });
+
+      startTimer.addEventListener("click", () => {
+        const minutes = Number(timerMinutes.value);
+        if (!minutes || minutes <= 0) {
+          timerMinutes.focus();
+          return;
+        }
+        closeTimerModal();
+        startCountdown(minutes);
+        recoveryNow.textContent = `Recovery move active: ${actionLabel(activeAction)}.`;
+      });
+
+      function stopTimer() {
+        if (activeTimer) {
+          clearInterval(activeTimer);
+          activeTimer = null;
+        }
+        timerStatus.textContent = "No active recovery timer.";
+        recoveryNow.textContent = "Recovery timer stopped. Choose a new recovery move.";
+      }
+
+      const chatHistory = [];
+      const speechApi =
+        window.SpeechRecognition || window.webkitSpeechRecognition || null;
+      let recognizer = null;
+      let isListening = false;
+      let autoSendPending = false;
+      let lastTranscript = "";
+      const synth = window.speechSynthesis;
+
+      function appendMessage(role, content) {
+        const bubble = document.createElement("div");
+        bubble.className = `bubble ${role}`;
+        bubble.textContent = content;
+        chatMessages.appendChild(bubble);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      chatForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const message = chatInput.value.trim();
+        if (!message) return;
+
+        chatInput.value = "";
+        appendMessage("user", message);
+        chatHistory.push({ role: "user", content: message });
+        chatStatus.textContent = "MindPulse is thinking...";
+
+        try {
+          const response = await fetch(CHAT_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message, history: chatHistory }),
+          });
+          if (!response.ok) {
+            throw new Error("AI backend unavailable");
+          }
+          const data = await response.json();
+          const reply = data.reply || "I’m here if you want to try again.";
+          appendMessage("assistant", reply);
+          chatHistory.push({ role: "assistant", content: reply });
+          speakReply(reply);
+          chatStatus.textContent = "Connected to AI backend.";
+        } catch (error) {
+          chatStatus.textContent = "AI backend offline. Start the Flask server to chat.";
+          appendMessage(
+            "assistant",
+            "I can’t reach the AI backend right now. Start the Flask server and try again."
+          );
+        }
+      });
+
+      function speakReply(text) {
+        if (!synth) return;
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 1;
+        utterance.pitch = 1;
+        synth.cancel();
+        synth.speak(utterance);
+      }
+
+      function startListening() {
+        if (!speechApi) {
+          chatStatus.textContent = "Voice input not supported in this browser.";
+          return;
+        }
+        if (!recognizer) {
+          recognizer = new speechApi();
+          recognizer.lang = "en-US";
+          recognizer.interimResults = true;
+          recognizer.onresult = (event) => {
+            const transcript = Array.from(event.results)
+              .map((result) => result[0].transcript)
+              .join("");
+            lastTranscript = transcript;
+            chatInput.value = transcript;
+            autoSendPending = Array.from(event.results).some((r) => r.isFinal);
+          };
+          recognizer.onend = () => {
+            if (isListening) {
+              recognizer.start();
+              return;
+            }
+            if (autoSendPending && lastTranscript.trim()) {
+              autoSendPending = false;
+              chatForm.dispatchEvent(new Event("submit"));
+            }
+          };
+          recognizer.onerror = () => {
+            isListening = false;
+            micToggle.textContent = "Mic";
+          };
+        }
+        isListening = true;
+        micToggle.textContent = "Stop";
+        autoSendPending = false;
+        lastTranscript = "";
+        recognizer.start();
+        chatStatus.textContent = "Listening...";
+      }
+
+      function stopListening() {
+        if (recognizer) recognizer.stop();
+        isListening = false;
+        micToggle.textContent = "Mic";
+        chatStatus.textContent = "Processing voice input...";
+      }
+
+      micToggle.addEventListener("click", () => {
+        if (isListening) stopListening();
+        else startListening();
+      });
+
+      function openChat() {
+        chatModal.classList.add("active");
+        chatModal.setAttribute("aria-hidden", "false");
+        chatInput.focus();
+      }
+
+      function closeChat() {
+        chatModal.classList.remove("active");
+        chatModal.setAttribute("aria-hidden", "true");
+        if (synth) synth.cancel();
+        if (isListening) stopListening();
+      }
+
+      chatFab.addEventListener("click", openChat);
+      chatClose.addEventListener("click", closeChat);
+      chatModal.addEventListener("click", (event) => {
+        if (event.target === chatModal) closeChat();
+      });
+
+      async function handleAuth(endpoint) {
+        signinError.textContent = "";
+        const payload = {
+          username: signinName.value.trim(),
+          email: signinEmail.value.trim(),
+          password: signinPassword.value.trim(),
+        };
+        if (!payload.email.endsWith("@gmail.com")) {
+          signinError.textContent = "Please use a Gmail address.";
+          return;
+        }
+        if (!payload.password) {
+          signinError.textContent = "Password is required.";
+          return;
+        }
+        if (!payload.username) {
+          signinError.textContent = "Username is required.";
+          return;
+        }
+        try {
+          const response = await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          const data = await response.json();
+          if (!response.ok) {
+            signinError.textContent = data.error || "Authentication failed.";
+            return;
+          }
+          const displayName = data.username || payload.username;
+          signinText.textContent = `Signed in: ${displayName}`;
+          logoutBtn.style.display = "inline";
+          welcomeText.textContent = `Welcome, ${displayName}.`;
+          localStorage.setItem(
+            "mindpulseUser",
+            JSON.stringify({ username: displayName, email: payload.email })
+          );
+          signinModal.style.display = "none";
+        } catch (error) {
+          signinError.textContent = "Unable to reach auth server.";
+        }
+      }
+
+      signinSubmit.addEventListener("click", () => handleAuth(LOGIN_URL));
+      signupSubmit.addEventListener("click", () => handleAuth(SIGNUP_URL));
+
+      logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("mindpulseUser");
+        signinText.textContent = "Not signed in";
+        logoutBtn.style.display = "none";
+        welcomeText.textContent = "Welcome back.";
+        signinModal.style.display = "flex";
+      });
+
+      const storedUser = localStorage.getItem("mindpulseUser");
+      if (storedUser) {
+        try {
+          const user = JSON.parse(storedUser);
+          if (user && user.username) {
+            signinText.textContent = `Signed in: ${user.username}`;
+            logoutBtn.style.display = "inline";
+            welcomeText.textContent = `Welcome, ${user.username}.`;
+            signinModal.style.display = "none";
+          }
+        } catch (error) {
+          localStorage.removeItem("mindpulseUser");
+        }
+      }
+
+      function openCheckinModal() {
+        checkinModal.classList.add("active");
+        checkinModal.setAttribute("aria-hidden", "false");
+      }
+
+      function closeCheckinModal() {
+        checkinModal.classList.remove("active");
+        checkinModal.setAttribute("aria-hidden", "true");
+      }
+
+      openCheckin.addEventListener("click", openCheckinModal);
+      cancelCheckin.addEventListener("click", closeCheckinModal);
+      checkinModal.addEventListener("click", (event) => {
+        if (event.target === checkinModal) closeCheckinModal();
+      });
+
+      saveCheckin.addEventListener("click", () => {
+        const sleepHours = Math.max(0, Math.min(12, Number(checkinSleep.value)));
+        const sleepScore = Math.round((sleepHours / 12) * 9 + 1);
+        const stressScore = Number(checkinStress.value);
+        const workloadScore = Number(checkinWorkload.value);
+        const moodScore = Number(checkinMood.value);
+        const waterLitres = Math.max(0, Math.min(10, Number(checkinWater.value)));
+
+        document.getElementById("sleep").value = sleepScore;
+        document.getElementById("stress").value = stressScore;
+        document.getElementById("workload").value = workloadScore;
+        document.getElementById("switching").value = Math.round((6 - moodScore) * 1.5 + 3);
+        if (waterLitres < 2.0) {
+          recoveryNow.textContent = "Hydration recommended now — aim for 0.5 L soon.";
+          showAlert("Hydration Alert", "Water intake below 2.0 L. Aim for 0.5 L soon.");
+        }
+        if (sleepHours < 5) {
+          showAlert("Sleep Alert", "Sleep below 5 hours. Plan an early reset and a lighter workload.");
+        }
+        updateInsights();
+
+        const now = new Date();
+        const dateLabel = now.toLocaleDateString();
+        lastCheckin.textContent = `Last check-in: ${dateLabel}`;
+        localStorage.setItem("mindpulseLastCheckin", dateLabel);
+        closeCheckinModal();
+      });
+
+      const storedCheckin = localStorage.getItem("mindpulseLastCheckin");
+      if (storedCheckin) {
+        lastCheckin.textContent = `Last check-in: ${storedCheckin}`;
+      }
+
+      function showAlert(title, message) {
+        alertLabel.textContent = title;
+        alertMessage.textContent = message;
+        alertPop.classList.add("active");
+        setTimeout(() => {
+          alertPop.classList.remove("active");
+        }, 4000);
+      }
+
+      function openExerciseModal(action, minutes) {
+        exerciseTitle.textContent = actionLabel(action);
+        exerciseMeta.textContent = `Timer: ${minutes} min`;
+        exerciseAnim.innerHTML = "";
+        if (action === "breathe") {
+          exerciseAnim.innerHTML = `<div class="anim-breathe"></div>`;
+        } else if (action === "eyes") {
+          exerciseAnim.innerHTML = `<div class="anim-eyes"></div>`;
+        } else if (action === "reset") {
+          exerciseAnim.innerHTML = `<div class="anim-reset"><span></span></div>`;
+        } else {
+          exerciseAnim.innerHTML = `<div class="anim-nap">Zzz</div>`;
+        }
+        exerciseModal.classList.add("active");
+        exerciseModal.setAttribute("aria-hidden", "false");
+      }
+
+      function closeExerciseModal() {
+        exerciseModal.classList.remove("active");
+        exerciseModal.setAttribute("aria-hidden", "true");
+        stopTimer();
+      }
+
+      exerciseClose.addEventListener("click", closeExerciseModal);
+      exerciseModal.addEventListener("click", (event) => {
+        if (event.target === exerciseModal) closeExerciseModal();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+*.pyc
+__pycache__/
+.venv/
+venv/
+env/
+.env
+.env.*
+*.log
+.DS_Store
+Thumbs.db
+frontend/.cache/
+backend/users.json
