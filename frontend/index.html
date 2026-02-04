@@ -113,31 +113,6 @@
         color: var(--muted);
       }
 
-      .signin-pill {
-        position: fixed;
-        top: 16px;
-        right: 20px;
-        padding: 6px 10px;
-        border-radius: 999px;
-        font-size: 0.7rem;
-        color: var(--muted);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(8, 14, 20, 0.6);
-        z-index: 70;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .signin-pill button {
-        border: none;
-        background: transparent;
-        color: var(--accent);
-        font-size: 0.7rem;
-        cursor: pointer;
-        padding: 0;
-      }
-
       .header-metrics {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -975,74 +950,6 @@
         font-family: inherit;
       }
 
-      .signin-modal {
-        position: fixed;
-        inset: 0;
-        background: rgba(6, 10, 14, 0.8);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        z-index: 60;
-      }
-
-      .signin-card {
-        width: min(460px, 94vw);
-        background: var(--card);
-        border-radius: 20px;
-        padding: 22px;
-        box-shadow: var(--shadow);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        display: grid;
-        gap: 12px;
-      }
-
-      .signin-card h3 {
-        margin: 0;
-        font-size: 1.4rem;
-      }
-
-      .signin-card p {
-        margin: 0;
-        color: var(--muted);
-      }
-
-      .signin-card input {
-        width: 100%;
-        padding: 10px 12px;
-        border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        background: rgba(8, 14, 20, 0.8);
-        color: var(--ink);
-        font-family: inherit;
-      }
-
-      .signin-card button {
-        padding: 10px 14px;
-        border-radius: 12px;
-        border: 1px solid rgba(124, 245, 198, 0.4);
-        background: linear-gradient(135deg, rgba(124, 245, 198, 0.25), rgba(70, 166, 255, 0.2));
-        color: var(--ink);
-        cursor: pointer;
-        font-family: inherit;
-      }
-
-      .signin-actions {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-      }
-
-      .signin-actions button.secondary {
-        background: transparent;
-        border-color: rgba(255, 255, 255, 0.12);
-      }
-
-      .signin-error {
-        color: #ff9f9f;
-        font-size: 0.85rem;
-      }
-
       .checkin-modal {
         position: fixed;
         inset: 0;
@@ -1233,11 +1140,6 @@
           </div>
         </div>
       </header>
-      <div class="signin-pill" id="signinPill">
-        <span id="signinText">Not signed in</span>
-        <button id="logoutBtn" style="display: none">Logout</button>
-      </div>
-
       <section class="grid">
         <div class="card hero">
           <h3>🧠 Mental Recovery Index (MRI)</h3>
@@ -1425,21 +1327,6 @@
       </div>
     </div>
 
-    <div class="signin-modal" id="signinModal">
-      <div class="signin-card">
-        <h3>Sign in to MindPulse</h3>
-        <p>Use your Gmail, username, and password.</p>
-        <input type="text" id="signinName" placeholder="Username" />
-        <input type="email" id="signinEmail" placeholder="Gmail address" />
-        <input type="password" id="signinPassword" placeholder="Password" />
-        <div class="signin-error" id="signinError"></div>
-        <div class="signin-actions">
-          <button class="secondary" id="signupSubmit">Create account</button>
-          <button id="signinSubmit">Sign in</button>
-        </div>
-      </div>
-    </div>
-
     <div class="checkin-modal" id="checkinModal" aria-hidden="true">
       <div class="checkin-card">
         <h3>Daily Check-In</h3>
@@ -1546,17 +1433,6 @@
       const chatFab = document.getElementById("chatFab");
       const chatModal = document.getElementById("chatModal");
       const chatClose = document.getElementById("chatClose");
-      const signinModal = document.getElementById("signinModal");
-      const signinName = document.getElementById("signinName");
-      const signinEmail = document.getElementById("signinEmail");
-      const signinPassword = document.getElementById("signinPassword");
-      const signinSubmit = document.getElementById("signinSubmit");
-      const signupSubmit = document.getElementById("signupSubmit");
-      const signinError = document.getElementById("signinError");
-      const signinPill = document.getElementById("signinPill");
-      const signinText = document.getElementById("signinText");
-      const logoutBtn = document.getElementById("logoutBtn");
-      const welcomeText = document.getElementById("welcomeText");
       const openCheckin = document.getElementById("openCheckin");
       const checkinModal = document.getElementById("checkinModal");
       const cancelCheckin = document.getElementById("cancelCheckin");
@@ -1570,8 +1446,6 @@
       const API_BASE = "http://127.0.0.1:5050";
       const API_URL = `${API_BASE}/predict`;
       const CHAT_URL = `${API_BASE}/chat`;
-      const SIGNUP_URL = `${API_BASE}/auth/signup`;
-      const LOGIN_URL = `${API_BASE}/auth/login`;
 
       function calculateMRI() {
         const sleep = Number(inputs[0].value);
@@ -2111,76 +1985,6 @@
       chatModal.addEventListener("click", (event) => {
         if (event.target === chatModal) closeChat();
       });
-
-      async function handleAuth(endpoint) {
-        signinError.textContent = "";
-        const payload = {
-          username: signinName.value.trim(),
-          email: signinEmail.value.trim(),
-          password: signinPassword.value.trim(),
-        };
-        if (!payload.email.endsWith("@gmail.com")) {
-          signinError.textContent = "Please use a Gmail address.";
-          return;
-        }
-        if (!payload.password) {
-          signinError.textContent = "Password is required.";
-          return;
-        }
-        if (!payload.username) {
-          signinError.textContent = "Username is required.";
-          return;
-        }
-        try {
-          const response = await fetch(endpoint, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-          });
-          const data = await response.json();
-          if (!response.ok) {
-            signinError.textContent = data.error || "Authentication failed.";
-            return;
-          }
-          const displayName = data.username || payload.username;
-          signinText.textContent = `Signed in: ${displayName}`;
-          logoutBtn.style.display = "inline";
-          welcomeText.textContent = `Welcome, ${displayName}.`;
-          localStorage.setItem(
-            "mindpulseUser",
-            JSON.stringify({ username: displayName, email: payload.email })
-          );
-          signinModal.style.display = "none";
-        } catch (error) {
-          signinError.textContent = "Unable to reach auth server.";
-        }
-      }
-
-      signinSubmit.addEventListener("click", () => handleAuth(LOGIN_URL));
-      signupSubmit.addEventListener("click", () => handleAuth(SIGNUP_URL));
-
-      logoutBtn.addEventListener("click", () => {
-        localStorage.removeItem("mindpulseUser");
-        signinText.textContent = "Not signed in";
-        logoutBtn.style.display = "none";
-        welcomeText.textContent = "Welcome back.";
-        signinModal.style.display = "flex";
-      });
-
-      const storedUser = localStorage.getItem("mindpulseUser");
-      if (storedUser) {
-        try {
-          const user = JSON.parse(storedUser);
-          if (user && user.username) {
-            signinText.textContent = `Signed in: ${user.username}`;
-            logoutBtn.style.display = "inline";
-            welcomeText.textContent = `Welcome, ${user.username}.`;
-            signinModal.style.display = "none";
-          }
-        } catch (error) {
-          localStorage.removeItem("mindpulseUser");
-        }
-      }
 
       function openCheckinModal() {
         checkinModal.classList.add("active");
